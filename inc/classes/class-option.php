@@ -112,7 +112,6 @@ class Option {
 				add_settings_section( $section, $data['title'], array( $this, 'settings_section' ), $this->plugin_slug );
 
 				foreach( $data['fields'] as $field ) {
-
 					// Add field to page
 					add_settings_field( $field['id'], $field['label'], array( $this, 'display_field' ), $this->plugin_slug, $section, array( 'field' => $field ) );
 				}
@@ -145,18 +144,19 @@ class Option {
 			case 'text':
 			case 'password':
 			case 'number':
+			case 'hidden':
 			case 'date':
 			case 'time':
 			case 'color':
-				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="' . $field['type'] . '" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '" value="' . $data . '"/>' . "\n";
+				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="' . ( ( ! isset( $field['hide'] ) || $field['hide'] == false ) ? $field['type'] : 'hidden' ) . '" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '" value="' . $data . '" ' . $this->rendAttribute( $field ) . '/>' . "\n";
 			break;
 
 			case 'text_secret':
-				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="text" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '" value=""/>' . "\n";
+				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="text" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '" value="" ' . $this->rendAttribute( $field ) . '/>' . "\n";
 			break;
 
 			case 'textarea':
-				$html .= '<textarea id="' . esc_attr( $field['id'] ) . '" rows="5" cols="50" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '">' . $data . '</textarea><br/>'. "\n";
+				$html .= '<textarea id="' . esc_attr( $field['id'] ) . '" rows="5" cols="50" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '" ' . $this->rendAttribute( $field ) . '>' . $data . '</textarea><br/>'. "\n";
 			break;
 
 			case 'checkbox':
@@ -164,7 +164,7 @@ class Option {
 				if( ( $data && 'on' == $data ) || $field[ 'default' ] == true ) {
 					$checked = 'checked="checked"';
 				}
-				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="' . $field['type'] . '" name="' . esc_attr( $option_name ) . '" ' . $checked . '/>' . "\n";
+				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="' . $field['type'] . '" name="' . esc_attr( $option_name ) . '" ' . $checked . ' ' . $this->rendAttribute( $field ) . '/>' . "\n";
 			break;
 
 			case 'checkbox_multi':
@@ -173,7 +173,7 @@ class Option {
 					if( is_array($data) && in_array( $k, $data ) ) {
 						$checked = true;
 					}
-					$html .= '<label for="' . esc_attr( $field['id'] . '_' . $k ) . '"><input type="checkbox" ' . checked( $checked, true, false ) . ' name="' . esc_attr( $option_name ) . '[]" value="' . esc_attr( $k ) . '" id="' . esc_attr( $field['id'] . '_' . $k ) . '" /> ' . $v . '</label> ';
+					$html .= '<label for="' . esc_attr( $field['id'] . '_' . $k ) . '"><input type="checkbox" ' . checked( $checked, true, false ) . ' name="' . esc_attr( $option_name ) . '[]" value="' . esc_attr( $k ) . '" id="' . esc_attr( $field['id'] . '_' . $k ) . '" ' . $this->rendAttribute( $field ) . '/> ' . $v . '</label> ';
 				}
 			break;
 
@@ -183,12 +183,12 @@ class Option {
 					if( $k == $data ) {
 						$checked = true;
 					}
-					$html .= '<label for="' . esc_attr( $field['id'] . '_' . $k ) . '"><input type="radio" ' . checked( $checked, true, false ) . ' name="' . esc_attr( $option_name ) . '" value="' . esc_attr( $k ) . '" id="' . esc_attr( $field['id'] . '_' . $k ) . '" /> ' . $v . '</label> ';
+					$html .= '<label for="' . esc_attr( $field['id'] . '_' . $k ) . '"><input type="radio" ' . checked( $checked, true, false ) . ' name="' . esc_attr( $option_name ) . '" value="' . esc_attr( $k ) . '" id="' . esc_attr( $field['id'] . '_' . $k ) . '" ' . $this->rendAttribute( $field ) . '/> ' . $v . '</label> ';
 				}
 			break;
 
 			case 'select':
-				$html .= '<select name="' . esc_attr( $option_name ) . '" id="' . esc_attr( $field['id'] ) . '">';
+				$html .= '<select name="' . esc_attr( $option_name ) . '" id="' . esc_attr( $field['id'] ) . '" ' . $this->rendAttribute( $field ) . '>';
 				foreach( $field['options'] as $k => $v ) {
 					$selected = false;
 					if( $k == $data ) {
@@ -200,7 +200,7 @@ class Option {
 			break;
 
 			case 'select_multi':
-				$html .= '<select name="' . esc_attr( $option_name ) . '[]" id="' . esc_attr( $field['id'] ) . '" multiple="multiple">';
+				$html .= '<select name="' . esc_attr( $option_name ) . '[]" id="' . esc_attr( $field['id'] ) . '" multiple="multiple" ' . $this->rendAttribute( $field ) . '>';
 				foreach( $field['options'] as $k => $v ) {
 					$selected = false;
 					if( in_array( $k, $data ) ) {
@@ -218,15 +218,26 @@ class Option {
 			case 'checkbox_multi':
 			case 'radio':
 			case 'select_multi':
-				$html .= '<br/><span class="description">' . $field['description'] . '</span>';
+				$html .= ( ! isset( $field['hide'] ) || $field['hide'] == false ) ? '<br/><span class="description">' . $field['description'] . '</span>' : __( 'Access Restricted', 'fwp-gbe' );
 			break;
 
 			default:
-				$html .= '<label for="' . esc_attr( $field['id'] ) . '"><span class="description">' . $field['description'] . '</span></label>' . "\n";
+				$html .= ( ! isset( $field['hide'] ) || $field['hide'] == false ) ? '<label for="' . esc_attr( $field['id'] ) . '"><span class="description">' . $field['description'] . '</span></label>' . "\n" : __( 'Access Restricted', 'fwp-gbe' );
 			break;
 		}
 
 		echo $html;
+	}
+	public function rendAttribute( $field ) {
+		$attr = [];
+		if( isset( $field[ 'attr' ] ) ) {
+			foreach( $field[ 'attr' ] as $attrName => $attVal ) {
+				if( in_array( $attrName, [ 'disabled' ] ) && $attVal == false ) {} else {
+					$attr[] = $attrName . '="' . esc_attr( $attVal ) . '"';
+				}
+			}
+		}
+		return implode( ' ', $attr );
 	}
 
 	/**

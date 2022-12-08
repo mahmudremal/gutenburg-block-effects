@@ -1,18 +1,14 @@
-# [WordPress Plugin - Gutenburg Block Effect](https://futurewordpress.com/wordpress/) 🎨
+# [WordPress Plugin - Gutenberg Block Effect](https://futurewordpress.com/wordpress/) 🎨
 [![Project Status: Active.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-* A WordPress Plugin Project for Appling animations on Gutenburg and those Blocks whos uses gutenburg system.
-This Plugin uses WordPress default functionality with JAVASCRIPT, and SCSS to build an Gutenburg Block Effect from scratch.
+* A WordPress Plugin Project for Appling animations on Gutenberg and those Blocks whos uses Gutenberg system.
+This Plugin uses WordPress default functionality with JAVASCRIPT, and SCSS to build an Gutenberg Block Effect from scratch.
 
 
 ## Features
 
-- ![](demo/Job%20Opening%20Job%20Lists.PNG)
-- ![](demo/Job%20Opening%20Archive%20page.PNG)
-- ![](demo/Job%20Opening%20Post%20New.PNG)
-
-- Shedule Posts on Activity Input.
-- Shedule Posts on Admin Posts.
+- Apply animtion on Gutenberg blocks.
+- Height Customizable from Dashboard.
 
 ## Maintainer
 
@@ -22,15 +18,13 @@ This Plugin uses WordPress default functionality with JAVASCRIPT, and SCSS to bu
 
 ## Usage
 
-1. Clone the WordPress Plugin [AJO](https://github.com/mahmudremal/buddypress-shedule-posts) in your WordPress
+1. Clone the WordPress Plugin [AJO](https://github.com/mahmudremal/gutenburg-block-effects) in your WordPress
 Plugin directory and activate it.
 
 ## Dashboard Setup.
 
-1. Setup plugin from Settings > Shedule posts and setup what you actually need with language:
-- ![](demo/Job%20Opening%20Setup%20Page.PNG)
-2. Flush WordPress permalink by Settings > Permalinks and then clicking SAVE Changes button:
-- ![](demo/Job%20Opening%20Permalink%20Flush.PNG)
+1. Setup plugin from Settings > Block Effect and setup what you actually need.
+
 ## Development ( To be added )
 
 **Install**
@@ -38,7 +32,7 @@ Plugin directory and activate it.
 Clone the repo and run
 
 ```bash
-cd buddypress-shedule-posts/assets
+cd gutenburg-block-effects/assets
 npm install
 ```
 
@@ -83,9 +77,9 @@ npm run format-js
 Directory Structure
 
 ```php
-BSP:
+GBE:
 │   .gitignore
-│   buddypress-shedule-posts.php
+│   block-effects.php
 │   README.md
 │   
 ├───assets
@@ -102,16 +96,62 @@ BSP:
 │   │   webpack.config.js
 │   │   
 │   ├───build
+│   │   │   assets.php
+│   │   │   
+│   │   ├───css
+│   │   │       frontend.css
+│   │   │       
+│   │   ├───js
+│   │   │       frontend.js
+│   │   │       
+│   │   └───library
+│   │       ├───css
+│   │       │   │   ace-responsive-menu.css
+│   │       │   │   admin.css
+│   │       │   │   animate.css
+│   │       │   │   bootstrap-grid.css
+│   │       │   │   bootstrap-grid.min.css
+│   │       │   │   bootstrap-select.min.css
+│   │       │   │   bootstrap.min.css
+│   │       │   │   fancyBox.css
+│   │       │   │   flaticon.css
+│   │       │   │   frontend-base.css
+│   │       │   │   invoice.css
+│   │       │   │   jquery-ui.min.css
+│   │       │   │   menu.css
+│   │       │   │   owl.css
+│   │       │   │   progressbar.css
+│   │       │   │   simplebar.min.css
+│   │       │   │   slick-theme.css
+│   │       │   │   slick.css
+│   │       │   │   slider.css
+│   │       │   │   timecounter.css
+│   │       │   │   
+│   │       │   └───map-css
+│   │       │           info-box.css
+│   │       │           maps.css
+│   │       │           searcher.css
+│   │       │           
+│   │       └───js
+│   │               bootstrap-select.min.js
+│   │               bootstrap.min.js
+│   │               jquery.counterup.js
+│   │               progressbar.js
+│   │               simplebar.js
+│   │               timepicker.js
+│   │               
 │   └───src
 │       ├───icons
 │       ├───img
 │       ├───js
-│       │   │   main.js
+│       │   │   backend.js
+│       │   │   frontend.js
 │       │   │   
-│       │   └───posts
-│       │           loadmore-single.js
-│       │           loadmore.js
-│       │           main.js
+│       │   ├───backend
+│       │   │       index.js
+│       │   │       
+│       │   └───frontend
+│       │           index.js
 │       │           
 │       ├───library
 │       │   ├───css
@@ -151,111 +191,45 @@ BSP:
 │       │           timepicker.js
 │       │           
 │       └───sass
-│           │   main.scss
+│           │   backend.scss
+│           │   frontend.scss
 │           │   
-│           ├───0-settings
-│           │       _background.scss
-│           │       _colors.scss
-│           │       _margin.scss
+│           ├───backend
 │           │       _settings.scss
-│           │       _typography.scss
-│           │       _variables.scss
-│           │       _z-index.scss
 │           │       
-│           ├───1-tools
-│           │       _functions.scss
-│           │       _mixins.scss
-│           │       _placeholders.scss
-│           │       _tools.scss
-│           │       
-│           ├───2-generic
-│           │       _buttons.scss
-│           │       _common-classes.scss
-│           │       _editor-color-classes.scss
-│           │       _elements.scss
-│           │       _generic.scss
-│           │       _gutenberg.scss
-│           │       _icons.scss
-│           │       _normalize.scss
-│           │       _search-results.scss
-│           │       _slick-carousel.scss
-│           │       _wp-css.scss
-│           │       
-│           └───3-utilities
-│                   _animations.scss
+│           └───frontend
+│                   _settings.scss
 │                   
-├───demo
 ├───inc
 │   ├───classes
-│   │   │   class-archive-settings.php
-│   │   │   class-assets.php
-│   │   │   class-blocks.php
-│   │   │   class-dashboard.php
-│   │   │   class-database.php
-│   │   │   class-hooks.php
-│   │   │   class-invoices.php
-│   │   │   class-loadmore-posts.php
-│   │   │   class-loadmore-single.php
-│   │   │   class-menus.php
-│   │   │   class-meta-boxes.php
-│   │   │   class-option.php
-│   │   │   class-post-types.php
-│   │   │   class-project.php
-│   │   │   class-requests.php
-│   │   │   class-shortcodes.php
-│   │   │   class-sidebars.php
-│   │   │   class-taxonomies.php
-│   │   │   class-update.php
-│   │   │   class-video.php
-│   │   │   class-widgets.php
-│   │   │   class-zip.php
-│   │   │   
-│   │   └───loader
-│   │           class-metabox.php
-│   │           class-option.php
-│   │           
+│   │       class-assets.php
+│   │       class-dashboard.php
+│   │       class-hooks.php
+│   │       class-menus.php
+│   │       class-option.php
+│   │       class-project.php
+│   │       class-translate.php
+│   │       class-update.php
+│   │       
 │   ├───helpers
 │   │       autoloader.php
 │   │       template-tags.php
+│   │       
+│   ├───loader
+│   │       class-metabox.php
+│   │       class-option.php
 │   │       
 │   └───traits
 │           trait-singleton.php
 │           
 ├───languages
+│       fwp-gbe-it_IT.mo
+│       fwp-gbe-it_IT.po
+│       fwp-gbe.pot
 │       README.md
 │       
 └───template-parts
-    │   apply.php
-    │   
-    ├───company
-    │       archive.php
-    │       single.php
-    │       
-    ├───dashboard
-    │   │   dashboard.php
-    │   │   
-    │   ├───candidate
-    │   │       agenda.php
-    │   │       apply.php
-    │   │       cvmanager.php
-    │   │       favourite.php
-    │   │       home.php
-    │   │       invoice.php
-    │   │       
-    │   └───company
-    │           application.php
-    │           home.php
-    │           managejobs.php
-    │           post.php
-    │           profile.php
-    │           resumes.php
-    │           
-    └───jobs
-            apply.php
-            archive.php
-            dashboard.php
-            list.php
-            single.php
+
 ```
 
 ### Fixing Errors
