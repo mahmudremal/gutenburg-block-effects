@@ -30,7 +30,7 @@ class Update {
 		$this->basename = plugin_basename( $this->file );
 		$this->active	= is_plugin_active( $this->basename );
     $this->set_username( 'mahmudremal' );
-    $this->set_repository( 'buddypress-shedule-posts' );
+    $this->set_repository( 'gutenburg-block-effects' );
     $this->authorize( false );
     $this->initialize();
 	}

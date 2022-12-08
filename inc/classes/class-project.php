@@ -18,12 +18,12 @@ class PROJECT {
     // Load class.
 		Assets::get_instance();
 		// Hooks::get_instance();
-		// Menus::get_instance();
-		// Option::get_instance();
+		Menus::get_instance();
+		Option::get_instance();
 		// Dashboard::get_instance();
 		// // Sidebars::get_instance();
-		// Requests::get_instance();
-    // Update::get_instance();
+		// Translate::get_instance();
+    Update::get_instance();
 	}
 	protected function setup_hooks() {
 		add_action( 'init', [ $this, 'loadTextdomain' ], 1, 0 ); // plugins_loaded
@@ -36,7 +36,7 @@ class PROJECT {
 	public function onInstall() {
 		global $wpdb;
 		$tables = [
-      'fwp_job_favourite'   => "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fwp_job_favourite (ID SERIAL NOT NULL , post_id INT NOT NULL , user_id INT NOT NULL , created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE = InnoDB COMMENT = 'This table created by Advanced Job Opening Plugin';",
+      // 'fwp_job_favourite'   => "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}fwp_job_favourite (ID SERIAL NOT NULL , post_id INT NOT NULL , user_id INT NOT NULL , created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE = InnoDB COMMENT = 'This table created by Advanced Job Opening Plugin';",
 		];
 		
 		foreach( $tables as $i => $sql ) {
@@ -66,14 +66,16 @@ class PROJECT {
 			}
 		}
 		// flush_rewrite_rules();
-		delete_option( 'buddypress-schedule-posts' );
+		delete_option( 'block-effects' );
 	}
 	public function loadTextdomain() {
-		load_plugin_textdomain( FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN, false, dirname( plugin_basename( FUTUREWORDPRESS_PROJECT__FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'fwp-gbe', false, dirname( plugin_basename( FUTUREWORDPRESS_PROJECT__FILE__ ) ) . '/languages' );
 	}
   public function body_class( $classes ) {
     if( is_array( $classes ) ) {$classes = (array) $classes;}
-    $classes[] = 'fwp-gbe';
+		if( is_FwpActive( 'fwp_gbe_enabled' ) ) {
+			$classes[] = 'fwp-gbe';
+		}
     return $classes;
   }
 

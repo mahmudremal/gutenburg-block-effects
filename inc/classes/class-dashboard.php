@@ -84,7 +84,7 @@ class Dashboard {
       
       // Add subnav item.
       bp_core_new_subnav_item( [
-        'name'                => __( 'Scheduled', 'domain' ),
+        'name'                => __( 'Scheduled', 'fwp-gbe' ),
         'slug'                => 'scheduled',
         'position'            => $position,
         'parent_url'          => $bp->displayed_user->domain . $parent_slug . '/',
@@ -102,7 +102,7 @@ class Dashboard {
 		bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
 	}
   public function bp_template_title() {
-    esc_html_e( 'Schedule & Post', 'domain' );
+    esc_html_e( 'Schedule & Post', 'fwp-gbe' );
   }
 	public function bp_template_content() {
 		if ( is_user_logged_in() ) {
@@ -179,7 +179,7 @@ class Dashboard {
     global $bp;
     $args[ 'activity-loop-none' ] = [
       'type'    => 'info',
-      'message' => __( 'Sorry, there was no Schedule & Post.', 'domain' )
+      'message' => __( 'Sorry, there was no Schedule & Post.', 'fwp-gbe' )
     ];
     return $args;
   }
@@ -220,7 +220,7 @@ class Dashboard {
     if( $current_profile_id != $logged_user_id ) {return;}
     
     bp_core_new_nav_item( array(
-      'name'                  => __( 'Schedule & Post', 'domain' ),
+      'name'                  => __( 'Schedule & Post', 'fwp-gbe' ),
       'slug'                  => 'schedule-and-post',
       'parent_url'            => $bp->displayed_user->domain,
       'parent_slug'           => $bp->profile->slug,
@@ -255,14 +255,14 @@ class Dashboard {
       bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
   }
   public function schedule_posts_screen_title() { 
-    esc_html_e( 'Schedule & Post', 'domain' );
+    esc_html_e( 'Schedule & Post', 'fwp-gbe' );
   }
   public function schedule_posts_screen_content() {
     // bp_get_member_activity_feed_link()
     ?>
-    <p><?php esc_html_e( 'Keep your content organized, schedule your posts, add your own content, engage your followers, get noticed by brands for collaborations, and manage your media content on the go.', 'domain' ); ?></p>
-    <p><?php esc_html_e( 'Schedule your new post, edit the existing ones and move posts between dates simply, with drag & drop.', 'domain' ); ?></p>
-    <a class="button btn btn-link" href="<?php echo esc_url( trailingslashit( bp_loggedin_user_domain() . '/activity/?create-activity=true' ) ); ?>" target="_blank"><?php esc_html_e( 'New Schedule', 'domain' ); ?></a>
+    <p><?php esc_html_e( 'Keep your content organized, schedule your posts, add your own content, engage your followers, get noticed by brands for collaborations, and manage your media content on the go.', 'fwp-gbe' ); ?></p>
+    <p><?php esc_html_e( 'Schedule your new post, edit the existing ones and move posts between dates simply, with drag & drop.', 'fwp-gbe' ); ?></p>
+    <a class="button btn btn-link" href="<?php echo esc_url( trailingslashit( bp_loggedin_user_domain() . '/activity/?create-activity=true' ) ); ?>" target="_blank"><?php esc_html_e( 'New Schedule', 'fwp-gbe' ); ?></a>
     <div id="fwp-schedule-calendar"></div>
     <?php
     include_once FUTUREWORDPRESS_PROJECT_DIR_PATH . '/template-parts/activity-edit-popup.php';
@@ -307,7 +307,7 @@ class Dashboard {
 
   public function ajaxData() {
     if( ! isset( $_POST[ 'nonce' ] ) || empty( $_POST[ 'nonce' ] ) || ! wp_verify_nonce( $_POST[ 'nonce' ], 'fwp_bsp_ajax_post_nonce' ) ) {
-      wp_send_json_error( __( 'Illigal request detected.', 'domain' ), 200 );
+      wp_send_json_error( __( 'Illigal request detected.', 'fwp-gbe' ), 200 );
     }
     $args = [];$query = '&action=activity_update';$query .= '&show_hidden=true';
     if( isset( $_POST[ 'currentab' ] ) && $_POST[ 'currentab' ] == 'upcoming' ) {
@@ -340,9 +340,9 @@ class Dashboard {
                 </div>
                 <div class="postactions">
                   <div class="action-bars">
-                    <a class="fwp-gbe-quickedit" href="javascript:void(0)" data-type="quickedit" data-activity="' . esc_attr( bp_get_activity_id() ) . '" data-schedule="' . esc_attr( str_replace( ['+00:00'], [''], date( 'Y-m-d\TH:i:sP', strtotime( $scheduled_on ) ) ) ) . '" data-content="' . esc_attr( $content ) . '"><i class="dashicons dashicons-welcome-write-blog"></i><span>' . esc_html__( 'Quick Edit', 'domain' ) . '</span></a>
-                    <a class="fwp-gbe-EventDelete" href="javascript:void(0)" data-activity="' . esc_attr( bp_get_activity_id() ) . '"><i class="dashicons dashicons-trash"></i> <span>' . esc_html__( 'Delete', 'domain' ) . '</span></a>
-                    <a href="' . esc_url( bp_activity_get_permalink( bp_get_activity_id() ) ) . '" target="_blank"><i class="dashicons dashicons-external"></i> <span>' . esc_html__( 'View', 'domain' ) . '</span></a>
+                    <a class="fwp-gbe-quickedit" href="javascript:void(0)" data-type="quickedit" data-activity="' . esc_attr( bp_get_activity_id() ) . '" data-schedule="' . esc_attr( str_replace( ['+00:00'], [''], date( 'Y-m-d\TH:i:sP', strtotime( $scheduled_on ) ) ) ) . '" data-content="' . esc_attr( $content ) . '"><i class="dashicons dashicons-welcome-write-blog"></i><span>' . esc_html__( 'Quick Edit', 'fwp-gbe' ) . '</span></a>
+                    <a class="fwp-gbe-EventDelete" href="javascript:void(0)" data-activity="' . esc_attr( bp_get_activity_id() ) . '"><i class="dashicons dashicons-trash"></i> <span>' . esc_html__( 'Delete', 'fwp-gbe' ) . '</span></a>
+                    <a href="' . esc_url( bp_activity_get_permalink( bp_get_activity_id() ) ) . '" target="_blank"><i class="dashicons dashicons-external"></i> <span>' . esc_html__( 'View', 'fwp-gbe' ) . '</span></a>
                   </div>
                 </div>
               </div>
@@ -355,16 +355,16 @@ class Dashboard {
   }
   public function ajaxDelete() {
     if( ! isset( $_POST[ 'nonce' ] ) || empty( $_POST[ 'nonce' ] ) || ! wp_verify_nonce( $_POST[ 'nonce' ], 'fwp_bsp_ajax_post_nonce' ) ) {
-      wp_send_json_error( __( 'Illigal request detected.', 'domain' ), 200 );
+      wp_send_json_error( __( 'Illigal request detected.', 'fwp-gbe' ), 200 );
     }
-    // if( ! bp_is_activity_component() ) {wp_send_json_error( __( 'Activity dsiabled. You\'ve to re-enable first.', 'domain' ), 200 );}
+    // if( ! bp_is_activity_component() ) {wp_send_json_error( __( 'Activity dsiabled. You\'ve to re-enable first.', 'fwp-gbe' ), 200 );}
     if( ! isset( $_POST[ 'activity' ] ) || empty( $_POST[ 'activity' ] ) ) {
-      wp_send_json_error( __( 'Specific activity not detected.', 'domain' ), 200 );
+      wp_send_json_error( __( 'Specific activity not detected.', 'fwp-gbe' ), 200 );
     }
     $activity_id = $_POST[ 'activity' ];$activityUserId = get_current_user_id();
     do_action( 'bp_activity_before_action_delete_activity', $activity_id, $activityUserId );
     if ( bp_activity_delete( array( 'id' => $activity_id, 'user_id' => $activityUserId ) ) ) {
-      wp_send_json_success( __( 'Successfully deleted this activity.', 'domain' ), 200 );
+      wp_send_json_success( __( 'Successfully deleted this activity.', 'fwp-gbe' ), 200 );
     }
     do_action( 'bp_activity_action_delete_activity', $activity_id, $activityUserId );
 
@@ -373,7 +373,7 @@ class Dashboard {
     global $wp, $wpdb, $bp;
     // print_r( $bp->activity->table_name );
     if( ! isset( $_POST[ 'activity-re-edit' ] ) || empty( $_POST[ 'activity-re-edit' ] ) || ! wp_verify_nonce( $_POST[ 'activity-re-edit' ], 'fwp-gbe-activity-re-edit' ) ) {
-      wp_die( __( 'Illigal request detected.', 'domain' ) );
+      wp_die( __( 'Illigal request detected.', 'fwp-gbe' ) );
     }
     if( isset( $_POST[ 'activity' ] ) && count( $_POST[ 'activity' ] ) >= 3 ) {
       $request = $_POST[ 'activity' ];
@@ -409,13 +409,13 @@ class Dashboard {
             bp_activity_update_meta( $request[ 'id' ], 'fwpbsp_meta_schedule', date( 'Y-m-d H:i:s', strtotime( $request[ 'schedule' ] ) ) );
             wp_safe_redirect( site_url( wp_get_referer() ) );
           } else {
-            wp_die( __( 'Something happens while tring to validate this activity and updating it.', 'domain' ), __( 'Error detected while processing.', 'domain' ) );
+            wp_die( __( 'Something happens while tring to validate this activity and updating it.', 'fwp-gbe' ), __( 'Error detected while processing.', 'fwp-gbe' ) );
           }
         } else {
-          wp_die( __( 'Activity failed to validate.', 'domain' ), __( 'Activity not found.', 'domain' ) );
+          wp_die( __( 'Activity failed to validate.', 'fwp-gbe' ), __( 'Activity not found.', 'fwp-gbe' ) );
         }
       } else {
-        wp_die( __( 'Problem detected in your request. Please fillup all things first.', 'domain' ), __( 'Form validation error.', 'domain' ) );
+        wp_die( __( 'Problem detected in your request. Please fillup all things first.', 'fwp-gbe' ), __( 'Form validation error.', 'fwp-gbe' ) );
       }
     }
   }
@@ -423,7 +423,7 @@ class Dashboard {
     global $wpdb, $bp;
     // print_r( $bp->activity->table_name );
     if( ! isset( $_POST[ 'nonce' ] ) || empty( $_POST[ 'nonce' ] ) || ! wp_verify_nonce( $_POST[ 'nonce' ], 'fwp_bsp_ajax_post_nonce' ) ) {
-      wp_send_json_error( __( 'Illigal request detected.', 'domain' ), 500 );
+      wp_send_json_error( __( 'Illigal request detected.', 'fwp-gbe' ), 500 );
     } else if( isset( $_POST[ 'activity' ] ) && ! empty( $_POST[ 'activity' ] ) && isset( $_POST[ 'schedule' ] ) && ! empty( $_POST[ 'schedule' ] ) ) {
       $request      = $_POST[ 'activity' ];
       $schedule     = date( 'Y-m-d H:i:s', strtotime( $_POST[ 'schedule' ] ) );
@@ -435,14 +435,14 @@ class Dashboard {
         bp_activity_update_meta( $request, 'fwpbsp_meta_schedule', $schedule );
         wp_send_json_success( [
           'date'      => str_replace( ['+00:00'], [''], date( 'Y-m-d\TH:i:sP', strtotime( $_POST[ 'schedule' ] ) ) ),
-          'message'   => sprintf( __( 'Scheduled successfully changed to %s.', 'domain' ), $schedule )
+          'message'   => sprintf( __( 'Scheduled successfully changed to %s.', 'fwp-gbe' ), $schedule )
         ], 200 );
       } else {
-        wp_send_json_error( __( 'Something happens while tring to validate this activity and updating it.', 'domain' ), 500 );
+        wp_send_json_error( __( 'Something happens while tring to validate this activity and updating it.', 'fwp-gbe' ), 500 );
         // wp_send_json_error( json_encode( (array) $activity_exists ), 200 );
       }
     } else {
-      wp_send_json_error( __( 'Request not valid or incomplete.', 'domain' ), 500 );
+      wp_send_json_error( __( 'Request not valid or incomplete.', 'fwp-gbe' ), 500 );
     }
   }
 

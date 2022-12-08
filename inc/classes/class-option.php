@@ -18,7 +18,7 @@ class Option {
 	private $options;
 	private $settings;
 
-	public function __construct( $plugin_name = 'buddypress-schedule-posts', $plugin_slug = 'buddypress-schedule-posts', $file = false ){
+	public function __construct( $plugin_name = 'block-effects', $plugin_slug = 'block-effects', $file = false ){
     if( ! $file ) {$file = __FILE__;}
 		$this->file = $file;
 		$this->plugin_slug = $plugin_slug;
@@ -50,7 +50,7 @@ class Option {
 	 * @return void
 	 */
 	public function add_menu_item() {
-		$page = add_options_page( __( 'Activity Schedule Setup Page', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ), __( 'Activity Schedule', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ), 'manage_options' , $this->plugin_slug,  array( $this, 'settings_page' ) );
+		$page = add_options_page( __( 'Gutenberg Block Effect Setup Page.', 'fwp-gbe' ), __( 'Block Effect', 'fwp-gbe' ), 'manage_options' , $this->plugin_slug,  array( $this, 'settings_page' ) );
 	}
 
 	/**
@@ -138,7 +138,7 @@ class Option {
 
 		$option_name = $this->plugin_slug ."[". $field['id']. "]";
 
-		$data = (isset($this->options[$field['id']])) ? $this->options[$field['id']] : '';
+		$data = ( isset( $this->options[ $field[ 'id' ] ] ) ) ? $this->options[ $field[ 'id' ] ] : ( isset( $field[ 'default' ] ) ? $field[ 'default' ] : '' );
 
 		switch( $field['type'] ) {
 
@@ -260,8 +260,8 @@ class Option {
 		// If you don't need tabbed navigation just strip out everything between the <!-- Tab navigation --> tags.
 	?>
 	  <div class="wrap" id="<?php echo $this->plugin_slug; ?>">
-	  	<h2><?php _e('Activity Schedule customization page.', $this->textdomain); ?></h2>
-	  	<p><?php _e('Your setting panel from where you can control Activity Schedule and customizations.', $this->textdomain); ?></p>
+	  	<h2><?php _e('Gutenberg block effect customization page.', $this->textdomain); ?></h2>
+	  	<p><?php _e('Setup Gutenberg block animation effect on Gutenberg and this kind of widgets based site.', $this->textdomain); ?></p>
 
 		<!-- Tab navigation starts -->
 		<h2 class="nav-tab-wrapper settings-tabs hide-if-no-js">

@@ -1,8 +1,8 @@
-# [WordPress Plugin - BuddyPress Shedule Posts](https://futurewordpress.com/wordpress/) 🎨
+# [WordPress Plugin - Gutenburg Block Effect](https://futurewordpress.com/wordpress/) 🎨
 [![Project Status: Active.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-* A WordPress Plugin Project for Shedule posts on BuddyPress platform.
-This theme uses Bootstrap build package and JQuery package to build an BuddyPress Shedule Posts from scratch.
+* A WordPress Plugin Project for Appling animations on Gutenburg and those Blocks whos uses gutenburg system.
+This Plugin uses WordPress default functionality with JAVASCRIPT, and SCSS to build an Gutenburg Block Effect from scratch.
 
 
 ## Features

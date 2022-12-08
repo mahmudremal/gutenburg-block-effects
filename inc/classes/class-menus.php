@@ -26,92 +26,64 @@ class Menus {
 		// is_FwpActive( 'key' )
 		$args = [];
 		$args['standard'] = [
-			'title'					=> __( 'General', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-			'description'			=> __( 'Generel fields comst commonly used to changed.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
+			'title'					=> __( 'General', 'fwp-gbe' ),
+			'description'			=> __( 'Setup your Gutenberg Block effects and all of it\'s customization is here.', 'fwp-gbe' ),
 			'fields'				=> [
 				[
-					'id' 			=> 'fwp_bsp_enabled',
-					'label'					=> __( 'Enable Schedule posts', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'			=> __( 'Mark to enable schedule posts features on Buddypress activity post.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'type'			=> 'checkbox',
-					'default'		=> true
-				],
-				[
-					'id' 			=> 'fwp_bsp_dashboardwidget',
-					'label'					=> __( 'Dashboard Widget', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'			=> __( 'Show Scheduled Posts in Dashboard Widget.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'type'			=> 'checkbox',
-					'default'		=> true
-				],
-				[
-					'id' 			=> 'fwp_bsp_posttimer',
-					'label'			=> __( 'CountDown timer', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'	=> __( 'Enable timer on scheduled posts. This will show a countdown timer after post content with Days, Hour, Minutes and Seconds parameter.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
+					'id' 			=> 'fwp_gbe_enabled',
+					'label'					=> __( 'Enable Effect', 'fwp-gbe' ),
+					'description'			=> __( 'Mark to enable Block Effect globally.', 'fwp-gbe' ),
 					'type'			=> 'checkbox',
 					'default'		=> true
 				],
 				// [
-				// 	'id' 			=> 'fwp_bsp_defaultime',
-				// 	'label'			=> __( 'Default Time', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-				// 	'description'	=> __( 'Set Default Schedule Time fro activity posts.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-				// 	'type'			=> 'time',
+				// 	'id' 			=> 'fwp_gbe_metabox',
+				// 	'label'					=> __( 'MetaBox Widget', 'fwp-gbe' ),
+				// 	'description'			=> __( 'Enable meta box widget on single page / post edit screen.', 'fwp-gbe' ),
+				// 	'type'			=> 'checkbox',
 				// 	'default'		=> true
 				// ],
+				[
+					'id' 			=> 'fwp_gbe_animation',
+					'label'			=> __( 'Default Animation', 'fwp-gbe' ),
+					'description'	=> __( 'Set Default animation on Gutenberg Block Effect.', 'fwp-gbe' ),
+					'type'			=> 'select',
+					'default'		=> 'fade-in',
+					'options'		=> [
+						'fade-in'				=> __( 'Fade In', 'fwp-gbe' ),
+						'fade-bottom'		=> __( 'Fade Bottom', 'fwp-gbe' ),
+						'fade-left'			=> __( 'Fade Left', 'fwp-gbe' ),
+						'fade-right'		=> __( 'Fade Right', 'fwp-gbe' )
+					]
+				],
+				[
+					'id' 			=> 'fwp_gbe_animduration',
+					'label'					=> __( 'Animation Duration', 'fwp-gbe' ),
+					'description'			=> __( 'Animation Effect duration. Better to let it less then 1.5 second.', 'fwp-gbe' ),
+					'type'			=> 'text',
+					'default'		=> '.7'
+				],
+				[
+					'id' 			=> 'fwp_gbe_animdistance',
+					'label'					=> __( 'Animation Distance', 'fwp-gbe' ),
+					'description'			=> __( 'Distence from where element should be animated. In pixel formate.', 'fwp-gbe' ),
+					'type'			=> 'text',
+					'default'		=> '30px'
+				],
+				[
+					'id' 			=> 'fwp_gbe_effectedclasses',
+					'label'			=> __( 'CSS Selectors', 'fwp-gbe' ),
+					'description'	=> __( 'Here you\'ve to suggest those widgets classes to apply block effect. Every single selectors should be seperated with comma.', 'fwp-gbe' ),
+					'type'			=> 'textarea',
+					'default'		=> '.wp-block-image, .wp-block-cover, .wp-block-stackable-heading, .wp-block-stackable-text, .wp-block-stackable-button, .wp-block-stackable-image, .stk-block-content'
+				],
 				// [
-				// 	'id' 			=> 'fwp_bsp_hidepostnow',
-				// 	'label'			=> __( 'Post Immediately', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-				// 	'description'	=> __( 'Hide Post Immediately or "post Update" button. If you check it, then buddypress default "post Update" button will be hidden.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
+				// 	'id' 			=> 'fwp_gbe_repeatoneach',
+				// 	'label'					=> __( 'Repeat Animation', 'fwp-gbe' ),
+				// 	'description'			=> __( 'Repeat animation on every scroll down function.', 'fwp-gbe' ),
 				// 	'type'			=> 'checkbox',
 				// 	'default'		=> false
 				// ],
-				[
-					'id' 			=> 'fwp_bsp_ondragconfirm',
-					'label'			=> __( 'Confirm on Drag', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'	=> __( 'By enabling this option, users have to confirm on schedule date switching. If you disable this option, then users doesn\'t need any confirmation to do.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'type'			=> 'checkbox',
-					'default'		=> true
-				],
-			]
-		];
-		$args['notify'] = [
-			'title'					=> __( 'Notification', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-			'description'			=> __( 'Setup notification information and function which should be enabled on reacting on Schedule posts. Also customize your notification text and additional informations.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-			'fields'				=> [
-				[
-					'id' 			=> 'fwp_bsp_notifybuddypress',
-					'label'					=> __( 'Enable Schedule posts', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'			=> __( 'Mark to enable schedule posts features on Buddypress activity post.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'type'			=> 'checkbox',
-					'default'		=> true
-				],
-				[
-					'id' 			=> 'fwp_bsp_notifydate-formate',
-					'label'					=> __( 'Date formate', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'			=> __( 'Notification date formate which willl be replace withh notification default date formate. Don\'t forget to keep it in PHP date formate.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'type'			=> 'text',
-					'default'		=> 'M d, Y H:i A'
-				],
-				[
-					'id' 			=> 'fwp_bsp_notifypublish-text',
-					'label'					=> __( 'On Pulished Text', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'			=> __( 'Notification title on activity post publish time. This is under translation. If you change it, you should review your translation to update it. Use {id} for Activity ID and {datetime} for activity scheduled published date.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'type'			=> 'text',
-					'default'		=> 'Activity id {id} has been published on {datetime}.'
-				],
-				[
-					'id' 			=> 'fwp_bsp_notifypaused-text',
-					'label'					=> __( 'On Pulished Text', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'			=> __( 'Notification title on activity post publish time. This is under translation. If you change it, you should review your translation to update it. Use {id} for Activity ID and {datetime} for activity scheduled published date.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'type'			=> 'text',
-					'default'		=> 'Scheduled activity ({id}) saved successfully. Will publish on {datetime}.'
-				],
-				[
-					'id' 			=> 'fwp_bsp_notify-link',
-					'label'					=> __( 'Notification link', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'description'			=> __( 'Kepp it enabled to have notification item link. Otherwise notification will be just a information notification without any link.', FUTUREWORDPRESS_PROJECT_TEXT_DOMAIN ),
-					'type'			=> 'checkbox',
-					'default'		=> true
-				],
 			]
 		];
 		return $args;
